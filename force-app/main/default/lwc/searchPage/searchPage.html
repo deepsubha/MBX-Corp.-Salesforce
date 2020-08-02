@@ -1,0 +1,74 @@
+<template>
+<lightning-layout>
+    <lightning-layout-item flexibility="grow"></lightning-layout-item>
+    <lightning-layout-item>
+        <lightning-button-stateful
+        label-when-off="MAXIMIZE"
+        label-when-on="MINIMIZE"
+        variant="brand"
+        icon-position="right"
+        selected={isVisible}
+        onclick={handleVisible}>
+        </lightning-button-stateful>
+    </lightning-layout-item>
+</lightning-layout>
+
+
+    <template if:true={isVisible}>
+    <lightning-card title="Search Opportunities" icon-name="custom:custom57">
+
+        <lightning-layout multiple-rows="true" vertical-align="end">
+        <lightning-layout-item padding="around-small">
+        <div class="slds-form-element">
+        <div class="slds-form-element__control">
+            <lightning-input type="search" value={sVal} onchange = {handleKeyChange} class="slds-m-buttom_small" label="search Opportunity">
+            </lightning-input>
+        </div>
+        </div>
+
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button variant= "brand" label= "search" title = "Primary action" onclick = {searchOpp} class= "slds-m-left_x-small"></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small" flexibility="grow"></lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-combobox style="width: 80px;"
+            name="pagesize"
+            label="page size"
+            value={pageSize}
+            placeholder={pageSize}
+            options={options}
+            onchange={handlePageChange} >
+            </lightning-combobox>
+        </lightning-layout-item>
+  
+    </lightning-layout>
+
+    </lightning-card>
+    </template>
+
+    <template if:true={data}>
+    <lightning-card title="List of Opportunities" icon-name="custom:custom9">
+        
+        <div class="slds-m-around_medium">
+            
+                <lightning-datatable 
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    onrowaction={callRowAction}>
+                </lightning-datatable>
+            
+        </div>
+
+        <div class="slds-m-around_medium">
+            <p class="slds-m-vertical_medium content">
+                     Displaying {startingRecord} to {endingRecord} of {totalRecountCount} records.
+                     Page {page} of {totalPage}. </p>
+            <c-paginator onprevious={previousHandler} onnext={nextHandler}></c-paginator>
+        </div>
+        
+    </lightning-card> 
+</template>
+
+</template>

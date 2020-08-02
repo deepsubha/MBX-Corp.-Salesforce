@@ -1,0 +1,10 @@
+.hide{
+    display: none;
+}
+.show{
+    color: beige;
+}
+.pos{
+    position: relative;
+    left: 80px;
+}
